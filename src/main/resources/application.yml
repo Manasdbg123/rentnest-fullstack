@@ -1,0 +1,33 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://dpg-d8g130urnols73d45ps0-a.oregon-postgres.render.com:5432/drivex_db_t2w1?sslmode=require}
+    username: ${DB_USERNAME:drivex_db_t2w1_user}
+    password: ${DB_PASSWORD:EeZPzoqV71HWjvfPKfDmRDMTlgILqe1T}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 15MB
+      max-request-size: 50MB
+
+app:
+  jwt:
+    secret: 9a4f2c8d3b7a1e6f45c8a0b3f267d8b1d4e6f3c8a9d2b5f8e3a9c8b5f6v8a3d9
+    expiration-milliseconds: 86400000
+
+cloudinary:
+  cloud-name: dgzeuzfbh
+  api-key: 291885923932489
+  api-secret: 6gbwLtP8lcKdJUPDpMhm5I9j2BA

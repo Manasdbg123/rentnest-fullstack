@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql:8.0
+    container_name: rentnest-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: rentnest
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  rentnest-app:
+    build: .
+    container_name: rentnest-backend
+    restart: on-failure
+    depends_on:
+      - mysqldb
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/rentnest?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      # Add your JWT and Cloudinary secrets here for production
+
+volumes:
+  mysql_data:
