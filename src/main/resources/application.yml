@@ -3,14 +3,10 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:rentnestdb
-    username: sa
-    password: password
-    driver-class-name: org.h2.Driver
-
-  h2:
-    console:
-      enabled: true
+    url: jdbc:mysql://localhost:3306/rentnest?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+    username: root
+    password: manas@9546
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
@@ -18,7 +14,7 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
+        dialect: org.hibernate.dialect.MySQLDialect
 
   servlet:
     multipart:
