@@ -25,7 +25,7 @@ RentNest is a modern, full-stack real estate platform inspired by NoBroker and A
 - **Spring Boot 3** (Java 17)
 - **Spring Security & JWT** (Authentication and Authorization)
 - **Spring Data JPA** (Hibernate)
-- **H2 Database** (Configured with automated data seeding)
+- **MySQL Database** (Configured with automated data seeding)
 - **Maven** (Dependency management)
 
 ## 🚀 Getting Started
