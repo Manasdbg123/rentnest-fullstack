@@ -1,1 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
+
+@layer base {
+  :root {
+    --brand-primary: #009688;
+    --brand-accent: #fd3752;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.4);
+  }
+  
+  /* Fallback Tailwind v4 theme mapping */
+  @theme {
+    --color-brand-primary: #009688;
+    --color-brand-accent: #fd3752;
+    --color-brand-dark: #1f2937;
+  }
+  
+  html {
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+  }
+  
+  body {
+    background-color: #f3f4f6;
+    color: #111827;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .dark body {
+    background-color: #111827;
+    color: #f9fafb;
+  }
+}
+
+@layer components {
+  /* Premium Glassmorphism Utilities */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  }
+  
+  .glass-dark {
+    background: rgba(17, 24, 39, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Micro-interactions */
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-to-r from-[#fd3752] to-[#e02d43] text-white font-semibold rounded-lg px-6 py-2.5 shadow-md hover:shadow-lg transition-all duration-300;
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px -10px rgba(253, 55, 82, 0.6);
+  }
+
+  .btn-secondary {
+    @apply bg-white text-[#1f2937] border border-gray-200 font-semibold rounded-lg px-6 py-2.5 shadow-sm hover:shadow-md hover:border-gray-300 hover:bg-gray-50 transition-all duration-300;
+  }
+
+  .btn-outline {
+    @apply border-2 border-[#009688] text-[#009688] bg-transparent hover:bg-[#009688] hover:text-white font-semibold rounded-lg px-6 py-2 transition-all duration-300;
+  }
+  
+  .input-field {
+    @apply w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-700 outline-none focus:ring-2 focus:ring-[#009688] focus:border-transparent transition-all duration-200;
+  }
+  
+  /* Smooth Animations */
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .slide-up {
+    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Skeleton Loading Shine Effect */
+.skeleton {
+  background: #e5e7eb;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.4) 20%,
+    rgba(255, 255, 255, 0.6) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Custom Map Markers */
+.custom-div-icon {
+  background: transparent;
+  border: none;
+}
+
+.price-marker {
+  background: white;
+  border: 2px solid #009688;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-weight: bold;
+  font-size: 12px;
+  color: #1f2937;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  position: relative;
+  font-family: 'Outfit', sans-serif;
+}
+
+.price-marker::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0;
+  border-style: solid;
+  border-color: #009688 transparent transparent transparent;
+}
+
+.price-marker:hover, .price-marker.active-marker {
+  background: #009688;
+  color: white;
+  transform: scale(1.1);
+  z-index: 1000 !important;
+}
+
+.price-marker.active-marker::after, .price-marker:hover::after {
+  border-color: #009688 transparent transparent transparent;
+}

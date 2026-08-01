@@ -1,4 +1,4 @@
-package com.rentnest.controller;
+package com.rentnest.controller.api.v1;
 
 import com.rentnest.dto.request.LoginRequest;
 import com.rentnest.dto.request.RegisterRequest;

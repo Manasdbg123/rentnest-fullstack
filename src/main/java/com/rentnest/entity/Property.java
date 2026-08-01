@@ -70,6 +70,16 @@ public class Property {
 
     private int rooms;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "property_amenities", joinColumns = @JoinColumn(name = "property_id"))
+    @Column(name = "amenity")
+    @Builder.Default
+    private List<String> amenities = new ArrayList<>();
+
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean negotiable = false;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
@@ -84,7 +94,7 @@ public class Property {
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PropertyImage> images = new ArrayList<>();
 
-    public enum PropertyType { APARTMENT, HOUSE, VILLA, STUDIO }
+    public enum PropertyType { APARTMENT, HOUSE, VILLA, STUDIO, ROOM, SHOP, COMMERCIAL, PG }
     public enum PropertyStatus { UNDER_REVIEW, ACTIVE, RENTED, INACTIVE, AVAILABLE }
     public enum FurnishingStatus { UNFURNISHED, SEMI_FURNISHED, FULLY_FURNISHED }
     public enum TenantPreference { ANY, FAMILY, BACHELOR, COMPANY }
