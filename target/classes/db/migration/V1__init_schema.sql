@@ -1,1 +1,0 @@
--- Initial RentNest database schema
